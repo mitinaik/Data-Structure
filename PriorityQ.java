@@ -1,52 +1,41 @@
 
-class PriorityQ<E extends Comparable<E>>
-
+class PriorityQ
 {
    private int maxSize;
-   private  Heap<E> heap = new Heap();
+   private long[] queArray;
    private int nItems;
-   private Heap Heap;
    
-   public PriorityQ(E[] item)
+   public PriorityQ(int s)
    {
-      //maxSize = s;
-    // HeapArray = new long[maxSize];
+      maxSize = s;
+      queArray = new long[maxSize];
       nItems = 0;
-      for(int i = 0; i < item.length; i++)
-         add(item[i]);
-
    }
-   public void add(E item)
+   public void insert(long item)
    {
-   
-   Heap.add(item);
-   /*
       int j;
       if(nItems == 0)
-         HeapArray[nItems++] = item;
+         queArray[nItems++] = item;
       else
       {
          for(j = nItems-1; j>=0; j--)
          {
-            if(item < HeapArray[j])
-               HeapArray[j+1] = HeapArray[j];
+            if(item > queArray[j])
+               queArray[j+1] = queArray[j];
             else
                break;
          }
-         HeapArray[j+1] = item;
+         queArray[j+1] = item;
          nItems++;
-     
-      }
-      */
+       }
     }
-   public E remove()
+   public long remove()
    {
-      return  heap.remove;//HeapArray[--nItems];
+      return queArray[--nItems];
    }  
-   
    public long peekMin()
    {
-      return HeapArray[nItems + 1];
+      return queArray[nItems - 1];
    }  
    public boolean isEmpty()
    {
@@ -62,11 +51,11 @@ class PriorityQApp
    public static void main(String[] args)
    {
       PriorityQ thePQ = new PriorityQ(5);
-      thePQ.add(30);
-      thePQ.add(50);
-      thePQ.add(10);
-      thePQ.add(40);
-      thePQ.add(20);
+      thePQ.insert(30);
+      thePQ.insert(50);
+      thePQ.insert(10);
+      thePQ.insert(40);
+      thePQ.insert(20);
       thePQ.remove();
       
       while(!thePQ.isEmpty())
